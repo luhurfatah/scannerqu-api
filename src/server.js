@@ -1,27 +1,12 @@
 const Hapi = require('@hapi/hapi');
-const fileHandler = require('./handler');
-const dotenv = require('dotenv');
-dotenv.config();
-const port = process.env.PORT;
+const { routes } = require('./routes');
 
 const server = Hapi.server({
-    host: 'localhost', 
-    port: port,
+    host: process.env.NODE_ENV !== 'production' ? 'localhost' : '0.0.0.0',
+    port: 5000,
 });
 
-server.route({
-    method: 'POST',
-    path: '/submit',
-    handler: fileHandler,
-    options: {
-        payload: {
-            output: 'stream',
-            parse: true,
-            allow: 'multipart/form-data',
-            multipart: true
-        }
-    }
-});
+server.route(routes);
 
 const init = async () => {
 
