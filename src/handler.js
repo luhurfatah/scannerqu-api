@@ -23,6 +23,6 @@ const fileHandler = (request, h) => {
 };
 
 const frontHandler = (request, h) => {
-    return h.response("<h1>Hello World </h1>")
+    return h.response("<h1>Welcome to ScannerQu API, POST to /submit endpoint to upload the images </h1>")
 }
 module.exports = {fileHandler, frontHandler};
